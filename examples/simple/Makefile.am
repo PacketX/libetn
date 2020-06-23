@@ -33,7 +33,13 @@ AM_CPPFLAGS= \
     -I$(top_srcdir)/src/simple \
     -include $(top_srcdir)/config.h
 AM_LDFLAGS=@LDFLAGS_SET@
-LDADD=$(top_srcdir)/lib/libetn.la @LIBS_SET@
+
+if ENABLE_SHARED
+LDADD=$(top_srcdir)/lib/.libs/*.o
+else
+LDADD=$(top_srcdir)/lib/libetn.la
+endif
+LDADD+=@LIBS_SET@
 
 # programs
 bin_PROGRAMS=simple

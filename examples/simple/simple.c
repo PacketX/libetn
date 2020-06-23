@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
     bool        icann;
     size_t      i;
     e_etn_t     *etn;
-    const char  *file, *ps, *eTLD, *manager;
+    const char  *file, *eTLD, *eTLD_1, *manager;
     const char  *domains[] = {
         "amazon.co.uk",
         "books.amazon.co.uk",
@@ -86,25 +86,25 @@ int main(int argc, char *argv[]) {
         return 1;
     }//end if
 
-    printf("  %24s%24s%24s      %s\n", "Domain", "Public Suffix", "eTLD+1", "Manage By");
+    printf("  %24s%24s%24s      %s\n", "Domain", "eTLD", "eTLD+1", "Manage By");
     for(i = 0 ; i < E_N_ELEMENTS(domains); i++) {
         if(strlen(domains[i]) == 0) {
             printf("\n");
             continue;
         }//end if
 
-        e_etn_public_suffix(etn, domains[i], &ps, &icann);
-        e_etn_eTLD_plus_one(etn, domains[i], &eTLD);
+        e_etn_public_suffix(etn, domains[i], &eTLD, &icann);
+        e_etn_eTLD_plus_one(etn, domains[i], &eTLD_1);
 
         manager = "Unmanaged";
         if(icann) {
             manager = "ICANN Managed";
         }//end if
-        else if(strrchr(ps, '.')) {
+        else if(strrchr(eTLD, '.')) {
             manager = "Privately Managed";
         }//end if
 
-        printf("> %24s%24s%24s  is  %s\n", domains[i], ps, eTLD, manager);
+        printf("> %24s%24s%24s  is  %s\n", domains[i], eTLD, eTLD_1, manager);
     }//end for
 
     e_etn_free(etn);

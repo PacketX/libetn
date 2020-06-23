@@ -46,3 +46,6 @@ test:
 
 go-dep:
 	$(E_GO_CMD) get -u golang.org/x/net/idna
+
+precompile:
+	$(E_GO_CMD) run ci/precompile.go -output ci/public_suffix_compiled.dat

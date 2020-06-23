@@ -2,7 +2,7 @@ libetn - C library for effective TLD names
 ==============
 
 ```
-                    Domain           Public Suffix                  eTLD+1      Manage By
+                    Domain                    eTLD                  eTLD+1      Manage By
 >             amazon.co.uk                   co.uk            amazon.co.uk  is  ICANN Managed
 >       books.amazon.co.uk                   co.uk            amazon.co.uk  is  ICANN Managed
 >   www.books.amazon.co.uk                   co.uk            amazon.co.uk  is  ICANN Managed
@@ -29,6 +29,17 @@ libetn - C library for effective TLD names
 >                cromulent               cromulent                          is  Unmanaged
 ```
 
+For dependency
+-----------
+
+```
+# do once
+$ go get -u golang.org/x/net/idna
+
+# or
+$ make go-dep
+```
+
 Prepare a pre-compiled data file
 -----------
 
@@ -36,14 +47,19 @@ Prepare a pre-compiled data file
 $ cd ci
 $ go run precompile.go -h
 Usage of precompile
-  -output string
-    	Output filename (default "public_suffix_compiled.dat")
-  -url string
-    	URL of the publicsuffix.org list. If empty, stdin is read instead (default "https://publicsuffix.org/list/effective_tld_names.dat")
+    -output string
+        Output filename (default "public_suffix_compiled.dat")
+    -url string
+        URL of the publicsuffix.org list. If empty, stdin is read instead (default "https://publicsuffix.org/list/effective_tld_names.dat")
 exit status 2
 $ go run precompile.go
 $ ls public_suffix_compiled.dat
 public_suffix_compiled.dat
+
+# or
+$ make precompile
+$ ls ci/public_suffix_compiled.dat
+ci/public_suffix_compiled.dat
 ```
 
 Benchmark

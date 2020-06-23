@@ -229,7 +229,7 @@ func main1() error {
 	} //end for
 	sort.Strings(labelsList)
 
-	if err := generate(printReal, &root, defaultOutput); err != nil {
+	if err := generate(printReal, &root, *output); err != nil {
 		return err
 	} //end if
 

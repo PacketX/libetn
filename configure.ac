@@ -199,6 +199,9 @@ AC_COMPILE_IFELSE(
     AC_MSG_RESULT(no)
         CFLAGS="$old_CFLAGS")
 
+# extra flags
+EXTRA_LIBS="-lrt $EXTRA_LIBS"
+
 AM_CONDITIONAL([ENABLE_SHARED], [ test "x${enable_shared}" = "xyes" ])
 
 # checks for library functions
